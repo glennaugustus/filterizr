@@ -50,6 +50,15 @@ export default function installAsJQueryPlugin($: any): void {
         case 'setOptions':
           filterizr.setOptions(...methodArgs);
           return this;
+		case 'nextPage':
+          filterizr.nextPage(...methodArgs);
+          return this;
+		case 'previousPage':
+          filterizr.previousPage(...methodArgs);
+          return this;
+		case 'gotoPage':
+          filterizr.gotoPage(...methodArgs);
+          return this;
         case 'destroy':
           filterizr.destroy(...methodArgs);
           // Kill internal reference to Filterizr instance

@@ -30,6 +30,7 @@
     "url": "git+ssh://git@github.com/giotiskl/Filterizr.git"
   },
   "dependencies": {
+    "@types/node": "^13.7.1",
     "fast-memoize": "^2.5.1",
     "imagesloaded": "^4.1.4"
   },
