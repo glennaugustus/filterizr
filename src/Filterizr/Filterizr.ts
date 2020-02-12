@@ -214,7 +214,15 @@ export default class Filterizr implements Destructible {
     const opt = this.options.get();
     if(opt.pagination) {
       const nbrItem = this.filterItems.getFiltered(this.options.filter, this.options.searchTerm, null).length;
-      const lastPage = Math.floor(nbrItem / opt.pagination.pageSize);
+      let lastPage = Math.floor(nbrItem / opt.pagination.pageSize);
+	  	// check if we hit a perfect division then no remainder
+	  if (nbrItem % opt.pagination.pageSize == 0 ) {
+		  let pageCheck = lastPage - 1;
+		  lastPage = pageCheck;
+		  if(pageCheck < 0) {
+        		lastPage = 0;
+      		}
+	  }
       if(page < 0) {
         page = 0;
       } else if(page > lastPage) {
@@ -229,7 +237,15 @@ export default class Filterizr implements Destructible {
     const opt = this.options.get();
     if(opt.pagination) {
       const nbrItem = this.filterItems.getFiltered(this.options.filter, this.options.searchTerm, null).length;
-      const lastPage = Math.floor(nbrItem / opt.pagination.pageSize);
+      let lastPage = Math.floor(nbrItem / opt.pagination.pageSize);
+		// check if we hit a perfect division then no remainder
+	  if (nbrItem % opt.pagination.pageSize == 0 ) {
+		  let pageCheck = lastPage - 1;
+		  lastPage = pageCheck;
+		  if(pageCheck < 0) {
+        		lastPage = 0;
+      		}
+	  }
       let page = opt.pagination.currentPage + 1;
       if(page > lastPage) {
         page = lastPage;
