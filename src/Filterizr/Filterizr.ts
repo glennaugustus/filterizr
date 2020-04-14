@@ -267,6 +267,36 @@ export default class Filterizr implements Destructible {
     this.render();
   }
 
+  public getPageCount() {
+	const opt = this.options.get();
+	let finalPage = 1;
+	if(opt.pagination) {
+		const totalItems = this.filterItems.getFiltered(this.options.filter, this.options.searchTerm, null).length;
+		finalPage = Math.floor(totalItems / opt.pagination.pageSize);
+                // check if we hit a perfect division then no remainder
+          if (totalItems % opt.pagination.pageSize == 0 ) {
+                  let pCheck = finalPage - 1;
+                  finalPage = pCheck;
+                  if(pCheck < 0) {
+                        finalPage = 1;
+                }
+				else
+				{
+				finalPage++;
+				}
+          }	
+	}
+	return finalPage;
+  }
+
+public getCurrentPage() {
+	const opt = this.options.get();
+	let currentPage = 1;
+	if(opt.pagination) {
+		return opt.pagination.currentPage;
+		}
+}
+
   private render(): void {
     const { filterContainer, filterItems, options } = this;
     const itemsToFilterIn = filterItems.getFiltered(options.filter, options.searchTerm, options.getPageRange());
