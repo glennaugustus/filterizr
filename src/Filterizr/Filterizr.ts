@@ -269,7 +269,7 @@ export default class Filterizr implements Destructible {
 
   public getPageCount() {
 	const opt = this.options.get();
-	let finalPage = 1;
+	let finalPage = 0;
 	if(opt.pagination) {
 		const totalItems = this.filterItems.getFiltered(this.options.filter, this.options.searchTerm, null).length;
 		finalPage = Math.floor(totalItems / opt.pagination.pageSize);
@@ -278,12 +278,8 @@ export default class Filterizr implements Destructible {
                   let pCheck = finalPage - 1;
                   finalPage = pCheck;
                   if(pCheck < 0) {
-                        finalPage = 1;
+                        finalPage = 0;
                 }
-				else
-				{
-				finalPage++;
-				}
           }	
 	}
 	return finalPage;
@@ -291,9 +287,12 @@ export default class Filterizr implements Destructible {
 
 public getCurrentPage() {
 	const opt = this.options.get();
-	let currentPage = 1;
+	let currentPage = 0;
 	if(opt.pagination) {
 		return opt.pagination.currentPage;
+		}
+		else {
+		return currentPage;
 		}
 }
 
