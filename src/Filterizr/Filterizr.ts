@@ -296,6 +296,10 @@ public getCurrentPage() {
 		}
 }
 
+public getFilterSearchItemCount() {
+		return this.filterItems.getFiltered(this.options.filter, this.options.searchTerm, null).length;
+}
+
   private render(): void {
     const { filterContainer, filterItems, options } = this;
     const itemsToFilterIn = filterItems.getFiltered(options.filter, options.searchTerm, options.getPageRange());
