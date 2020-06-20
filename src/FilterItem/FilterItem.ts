@@ -76,13 +76,24 @@ export default class FilterItem extends FilterizrElement {
   }
 
   /**
+   * Returns the grid items data-excluded attribute
+   * with a regexp regarding all whitespace.
+   */
+  public getExcluded(): string[] {
+  	if (this.node.hasAttribute('data-scope')) {
+		return this.node.getAttribute('data-scope').split(/\s*,\s*/g);
+	} else {
+		return null;
+	} 
+  }
+  /**
    * Returns the value of the sort attribute
    * @param sortAttribute "index", "sortData" or custom user data-attribute by which to sort
    */
   public getSortAttribute(sortAttribute: string): string | number {
     return this.sortData[sortAttribute];
   }
-
+  
   protected bindEvents(): void {
     this.eventReceiver.on('transitionend', (): void => {
       // On transition end determines if the item is filtered out or not.

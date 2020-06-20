@@ -84,14 +84,15 @@ export default class FilterItems implements Destructible, Styleable {
     return (filterItem : FilterItem) : boolean => {
       const shouldBeFiltered = this.shouldBeFiltered(filterItem.getCategories(), filter)
       const contentsMatchSearch = filterItem.contentsMatchSearch(searchTerm);
+	  const notExcluded = this.shouldBeIncluded(filterItem.getExcluded());
       const elementInRange = !pagination || (acceptedElemCount >= pagination.start && acceptedElemCount < pagination.end)
-      if(shouldBeFiltered && contentsMatchSearch) {
+      if(shouldBeFiltered && contentsMatchSearch && notExcluded) {
         acceptedElemCount++;
       }
       if(inverse) {
-        return shouldBeFiltered && contentsMatchSearch && elementInRange
+        return shouldBeFiltered && contentsMatchSearch && notExcluded && elementInRange
       } else {
-        return !(shouldBeFiltered && contentsMatchSearch && elementInRange);
+        return !(shouldBeFiltered && contentsMatchSearch && notExcluded && elementInRange);
       }
     }
   }
@@ -162,5 +163,13 @@ export default class FilterItems implements Destructible, Styleable {
     } else {
       return categories.includes(filter);
     }
+  }
+  private shouldBeIncluded(excluded: string[]): boolean {
+      const excludedItemOption = this.options.getRaw().excludedItem || "";
+	  if (excluded == null) {
+		  return true;
+	  } else {
+      	return !(excluded.includes(excludedItemOption)); 
+	  }
   }
 }

@@ -50,6 +50,14 @@ export default class FilterizrOptions {
     this.options.searchTerm = searchTerm;
   }
 
+  public get excludedItem(): string {
+    return this.options.excludedItem;
+  }
+
+  public set excludedItem(excludedItem: string) {
+    this.options.excludedItem = excludedItem;
+  }
+  
   public getPageRange() : Pagination {
     return this.options.pagination && {
       start : this.options.pagination.pageSize * this.options.pagination.currentPage,
@@ -134,6 +142,7 @@ export default class FilterizrOptions {
       ['and', 'or']
     );
     checkOptionForErrors('searchTerm', options.searchTerm, 'string');
+	checkOptionForErrors('excludedItem', options.excludedItem, 'string');
     checkOptionForErrors('setupControls', options.setupControls, 'boolean');
     checkOptionForErrors('pagination', options.pagination, 'object');
     if(options.pagination) {

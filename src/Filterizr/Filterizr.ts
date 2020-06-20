@@ -185,7 +185,8 @@ export default class Filterizr implements Destructible {
     if (
       'filter' in newOptions ||
       'multifilterLogicalOperator' in newOptions ||
-      'pagination' in newOptions
+      'pagination' in newOptions ||
+	  'excludedItem' in newOptions
     ) {
       this.filter(this.options.filter);
     }

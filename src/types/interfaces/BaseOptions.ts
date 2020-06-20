@@ -18,7 +18,8 @@ export interface BaseOptions {
   searchTerm?: string;
   setupControls?: boolean;
   spinner?: SpinnerOptions;
-  pagination? : PaginationOptions
+  pagination? : PaginationOptions;
+  excludedItem?: string
 }
 
 export interface PaginationOptions {
